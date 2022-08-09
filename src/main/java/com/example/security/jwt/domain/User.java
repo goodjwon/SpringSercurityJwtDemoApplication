@@ -4,19 +4,18 @@ import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Builder
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@Entity
-@EntityListeners(AuditingEntityListener.class)
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.GenerationType.AUTO;
+
+
+@Entity @NoArgsConstructor @AllArgsConstructor @Data
 @Table(name="USERS")
 public class User{
 
-    @Id
+    @Id @GeneratedValue(strategy = AUTO)
     @Column(name = "user_id")
     private String userId;
 
@@ -31,4 +30,7 @@ public class User{
 
     @Column
     private String position;
+
+    @ManyToMany(fetch = EAGER)
+    private List<Role> roles = new ArrayList<>();
 }
