@@ -17,7 +17,7 @@ public class User{
 
     @Id @GeneratedValue(strategy = AUTO)
     @Column(name = "user_id")
-    private String userId;
+    private Long userId;
 
     @Column(name = "user_name")
     private String userName;
@@ -33,4 +33,10 @@ public class User{
 
     @ManyToMany(fetch = EAGER)
     private List<Role> roles = new ArrayList<>();
+
+    public User(String userName, String userPwd, List<Role> roles) {
+        this.userName = userName;
+        this.userPwd = userPwd;
+        this.roles = roles;
+    }
 }
